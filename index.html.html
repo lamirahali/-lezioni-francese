@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lezioni di francese a Borgata Paradiso, Collegno | French Lessons in Collegno</title>
+<meta name="description" content="Lezioni private di francese a Borgata Paradiso, Collegno (Torino). Insegnante multilingue, lezioni in italiano o in inglese. 30€/ora, prima sessione di 30 minuti gratuita. Private French lessons in Collegno, taught in Italian or English.">
+<meta name="keywords" content="lezioni di francese Collegno, insegnante francese Borgata Paradiso, ripetizioni francese Torino, French lessons Collegno, French tutor Turin">
+<meta name="geo.region" content="IT-TO">
+<meta name="geo.placename" content="Collegno, Borgata Paradiso">
+<meta property="og:title" content="Impara il francese a Borgata Paradiso, Collegno">
+<meta property="og:description" content="Lezioni private con un'insegnante multilingue del quartiere. 30€/ora. Prima mezz'ora gratis.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF9F4;
+    --paper-deep:#F4F0E6;
+    --seyes:#C9BCE4;
+    --seyes-light:#E2DAF2;
+    --margin-red:#D64949;
+    --ink:#20355F;
+    --ink-deep:#16233F;
+    --text:#2A2C38;
+    --soft:#6B6E7E;
+    --white:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Karla',sans-serif;
+    color:var(--text);
+    background:var(--paper);
+    line-height:1.6;
+    font-size:17px;
+  }
+  /* ---- Séyès notebook paper ---- */
+  .seyes{
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(to bottom, var(--seyes-light) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--seyes) 1px, transparent 1px);
+    background-size:100% 8px, 100% 32px;
+    position:relative;
+  }
+  .seyes::before{
+    content:"";
+    position:absolute;
+    top:0;bottom:0;
+    left:clamp(28px, 8vw, 110px);
+    width:2px;
+    background:var(--margin-red);
+    opacity:.75;
+  }
+  .page{
+    max-width:960px;
+    margin:0 auto;
+    padding-left:clamp(48px, 12vw, 150px);
+    padding-right:clamp(20px, 5vw, 48px);
+  }
+
+  /* ---- Header ---- */
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:22px;
+    padding-bottom:10px;
+  }
+  .brand{
+    font-family:'Caveat',cursive;
+    font-size:1.55rem;
+    color:var(--ink);
+  }
+  .lang-toggle{
+    display:flex;
+    border:1.5px solid var(--ink);
+    border-radius:999px;
+    overflow:hidden;
+    background:var(--white);
+  }
+  .lang-toggle button{
+    font-family:'Karla',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    letter-spacing:.06em;
+    padding:7px 16px;
+    border:none;
+    background:transparent;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .lang-toggle button.active{
+    background:var(--ink);
+    color:var(--white);
+  }
+  .lang-toggle button:focus-visible{outline:2px solid var(--margin-red);outline-offset:2px}
+
+  /* ---- Hero ---- */
+  .hero{
+    padding-top:clamp(40px, 8vw, 84px);
+    padding-bottom:clamp(56px, 9vw, 96px);
+  }
+  .hand-note{
+    font-family:'Caveat',cursive;
+    font-size:clamp(1.4rem, 3vw, 1.8rem);
+    color:var(--margin-red);
+    transform:rotate(-1.4deg);
+    display:inline-block;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Young Serif',serif;
+    font-size:clamp(2.1rem, 5.4vw, 3.6rem);
+    line-height:1.14;
+    color:var(--ink-deep);
+    max-width:15ch;
+    margin-bottom:22px;
+  }
+  h1 .underline{
+    background-image:linear-gradient(to right, var(--margin-red), var(--margin-red));
+    background-repeat:no-repeat;
+    background-size:100% 4px;
+    background-position:0 96%;
+    padding-bottom:2px;
+  }
+  .hero p.lead{
+    font-size:clamp(1.05rem, 2vw, 1.25rem);
+    max-width:52ch;
+    color:var(--text);
+    margin-bottom:34px;
+  }
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn{
+    display:inline-block;
+    font-weight:700;
+    font-size:1rem;
+    padding:14px 28px;
+    border-radius:8px;
+    text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:focus-visible{outline:3px solid var(--margin-red);outline-offset:3px}
+  .btn-primary{
+    background:var(--ink);
+    color:var(--white);
+    box-shadow:0 3px 0 var(--ink-deep);
+  }
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{
+    color:var(--ink);
+    border:1.5px solid var(--ink);
+    background:var(--white);
+  }
+  .btn-ghost:hover{transform:translateY(-2px)}
+  .free-tag{
+    font-family:'Caveat',cursive;
+    font-size:1.35rem;
+    color:var(--margin-red);
+    transform:rotate(1.5deg);
+  }
+
+  /* ---- Sections ---- */
+  section{padding:clamp(48px, 8vw, 84px) 0}
+  .eyebrow{
+    font-size:.8rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--margin-red);
+    margin-bottom:10px;
+  }
+  h2{
+    font-family:'Young Serif',serif;
+    font-size:clamp(1.5rem, 3.4vw, 2.1rem);
+    color:var(--ink-deep);
+    margin-bottom:18px;
+    max-width:24ch;
+  }
+  .plain{background:var(--white)}
+  .plain-inner{
+    max-width:960px;margin:0 auto;
+    padding-left:clamp(20px,5vw,48px);
+    padding-right:clamp(20px,5vw,48px);
+  }
+
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
+    margin-top:28px;
+  }
+  .card{
+    background:var(--paper);
+    border:1.5px solid var(--paper-deep);
+    border-radius:12px;
+    padding:24px 22px;
+  }
+  .card h3{
+    font-family:'Karla',sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  .card p{font-size:.96rem;color:var(--soft)}
+  .card .big{
+    font-family:'Young Serif',serif;
+    font-size:1.9rem;
+    color:var(--ink-deep);
+    display:block;
+    margin-bottom:6px;
+  }
+
+  /* price strip */
+  .price-strip{
+    display:flex;
+    flex-wrap:wrap;
+    gap:26px;
+    align-items:baseline;
+    margin-top:26px;
+    padding:26px 28px;
+    background:var(--white);
+    border:1.5px solid var(--seyes-light);
+    border-radius:14px;
+  }
+  .price{
+    font-family:'Young Serif',serif;
+    font-size:clamp(2.4rem,6vw,3.2rem);
+    color:var(--ink-deep);
+  }
+  .price small{
+    font-family:'Karla',sans-serif;
+    font-size:1rem;
+    color:var(--soft);
+    font-weight:500;
+  }
+  .price-note{max-width:40ch;color:var(--soft);font-size:.98rem}
+
+  /* about */
+  .about-flex{display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start}
+  .about-text{flex:1 1 380px}
+  .langs{
+    flex:0 1 260px;
+    background:var(--white);
+    border:1.5px solid var(--seyes-light);
+    border-radius:12px;
+    padding:22px;
+  }
+  .langs h3{
+    font-size:.8rem;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--margin-red);margin-bottom:12px;
+  }
+  .langs ul{list-style:none}
+  .langs li{
+    padding:7px 0;
+    border-bottom:1px dashed var(--seyes-light);
+    font-size:.98rem;
+  }
+  .langs li:last-child{border-bottom:none}
+  .langs li span{color:var(--soft);font-size:.88rem}
+
+  /* contact */
+  .contact-box{
+    background:var(--ink);
+    color:var(--white);
+    border-radius:16px;
+    padding:clamp(30px,5vw,46px);
+    margin-top:8px;
+  }
+  .contact-box h2{color:var(--white)}
+  .contact-box p{max-width:56ch;margin-bottom:24px;color:#DDE3F2}
+  .contact-box .btn-primary{
+    background:var(--white);
+    color:var(--ink-deep);
+    box-shadow:0 3px 0 rgba(0,0,0,.25);
+  }
+  .contact-box .hand-note{color:#F5C3C3}
+
+  footer{
+    padding:34px 0 46px;
+    color:var(--soft);
+    font-size:.9rem;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .btn{transition:none}
+  }
+  @media (max-width:560px){
+    .seyes::before{left:20px}
+    .page{padding-left:38px;padding-right:18px}
+  }
+</style>
+</head>
+<body>
+
+<div class="seyes">
+  <div class="page">
+    <header>
+      <div class="brand" data-it="il quaderno di francese" data-en="the French notebook">il quaderno di francese</div>
+      <div class="lang-toggle" role="group" aria-label="Language / Lingua">
+        <button id="btn-it" class="active" onclick="setLang('it')">IT</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <span class="hand-note" data-it="Bonjour, vicini di Borgata Paradiso!" data-en="Bonjour, neighbours of Borgata Paradiso!">Bonjour, vicini di Borgata Paradiso!</span>
+      <h1 data-it='La tua insegnante di francese abita a <span class="underline">due passi da te</span>.' data-en='Your French teacher lives <span class="underline">just around the corner</span>.'>La tua insegnante di francese abita a <span class="underline">due passi da te</span>.</h1>
+      <p class="lead" data-it="Lezioni private di francese a Borgata Paradiso, Collegno. Niente traffico, niente piattaforme anonime: solo tu, un quaderno e una vicina di casa che parla cinque lingue. Ti insegno in italiano o in inglese, come preferisci. A casa oppure online." data-en="Private French lessons in Borgata Paradiso, Collegno. No commute, no anonymous platforms: just you, a notebook, and a neighbour who speaks five languages. I can teach you in Italian or in English, whichever you prefer. At home or online.">Lezioni private di francese a Borgata Paradiso, Collegno. Niente traffico, niente piattaforme anonime: solo tu, un quaderno e una vicina di casa che parla cinque lingue. Ti insegno in italiano o in inglese, come preferisci. A casa oppure online.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contatti" data-it="Prenota la prova gratuita" data-en="Book your free trial">Prenota la prova gratuita</a>
+        <a class="btn btn-ghost" href="test.html" data-it="Scopri il tuo livello" data-en="Discover your level">Scopri il tuo livello</a>
+        <span class="free-tag" data-it="i primi 30 minuti sono gratis ✎" data-en="the first 30 minutes are free ✎">i primi 30 minuti sono gratis ✎</span>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="plain">
+  <div class="plain-inner">
+    <section id="come-funziona">
+      <p class="eyebrow" data-it="Come funziona" data-en="How it works">Come funziona</p>
+      <h2 data-it="Semplice come un caffè tra vicini" data-en="As simple as coffee with a neighbour">Semplice come un caffè tra vicini</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="big">30&prime;</span>
+          <h3 data-it="Prova gratuita" data-en="Free trial">Prova gratuita</h3>
+          <p data-it="Ci conosciamo, valuto il tuo livello e ti propongo un percorso. Zero impegno." data-en="We meet, I assess your level and suggest a plan. Zero commitment.">Ci conosciamo, valuto il tuo livello e ti propongo un percorso. Zero impegno.</p>
+        </div>
+        <div class="card">
+          <span class="big">IT / EN</span>
+          <h3 data-it="Scegli la lingua ponte" data-en="Choose your bridge language">Scegli la lingua ponte</h3>
+          <p data-it="Spiegazioni in italiano o in inglese, a seconda di cosa ti è più comodo." data-en="Explanations in Italian or English, whichever feels more natural to you.">Spiegazioni in italiano o in inglese, a seconda di cosa ti è più comodo.</p>
+        </div>
+        <div class="card">
+          <span class="big" data-it="Vicino" data-en="Local">Vicino</span>
+          <h3 data-it="Nel quartiere" data-en="In the neighbourhood">Nel quartiere</h3>
+          <p data-it="Lezioni a Borgata Paradiso e dintorni, a casa o online. Orari flessibili, anche sera e weekend." data-en="Lessons in Borgata Paradiso and nearby, at home or online. Flexible hours, evenings and weekends too.">Lezioni a Borgata Paradiso e dintorni, a casa o online. Orari flessibili, anche sera e weekend.</p>
+        </div>
+      </div>
+
+      <div class="price-strip">
+        <div class="price">30€ <small data-it="/ ora" data-en="/ hour">/ ora</small></div>
+        <p class="price-note" data-it="Un prezzo unico e onesto. Nessun pacchetto obbligatorio, nessuna iscrizione: paghi solo le ore che fai." data-en="One honest price. No mandatory packages, no enrolment fees: you only pay for the hours you take.">Un prezzo unico e onesto. Nessun pacchetto obbligatorio, nessuna iscrizione: paghi solo le ore che fai.</p>
+      </div>
+    </section>
+
+    <section id="chi-sono">
+      <p class="eyebrow" data-it="Chi sono" data-en="About me">Chi sono</p>
+      <h2 data-it="Una vicina che vive tra le lingue" data-en="A neighbour who lives between languages">Una vicina che vive tra le lingue</h2>
+      <div class="about-flex">
+        <div class="about-text">
+          <p data-it="Mi chiamo Lami e abito qui a Borgata Paradiso. Parlo cinque lingue e insegno francese da anni, a studenti, adulti e curiosi di ogni età. Il mio metodo è pratico: conversazione fin dal primo giorno, grammatica solo quando serve davvero, e materiali costruiti sui tuoi obiettivi, che sia un esame, un viaggio, un colloquio di lavoro o il piacere di capire le canzoni francesi." data-en="My name is Lami and I live right here in Borgata Paradiso. I speak five languages and have been teaching French for years, to students, adults and curious minds of every age. My method is practical: conversation from day one, grammar only when it truly helps, and materials built around your goals, whether that's an exam, a trip, a job interview or simply understanding French songs.">Mi chiamo Lami e abito qui a Borgata Paradiso. Parlo cinque lingue e insegno francese da anni, a studenti, adulti e curiosi di ogni età. Il mio metodo è pratico: conversazione fin dal primo giorno, grammatica solo quando serve davvero, e materiali costruiti sui tuoi obiettivi, che sia un esame, un viaggio, un colloquio di lavoro o il piacere di capire le canzoni francesi.</p>
+        </div>
+        <div class="langs">
+          <h3 data-it="Le mie lingue" data-en="My languages">Le mie lingue</h3>
+          <ul>
+            <li>Français <span data-it="· la lingua che insegno" data-en="· the language I teach">· la lingua che insegno</span></li>
+            <li>Italiano <span data-it="· lingua di insegnamento" data-en="· teaching language">· lingua di insegnamento</span></li>
+            <li>English <span data-it="· lingua di insegnamento" data-en="· teaching language">· lingua di insegnamento</span></li>
+            <li>Español</li>
+            <li>العربية</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contatti">
+      <div class="contact-box">
+        <span class="hand-note" data-it="On commence ?" data-en="On commence ?">On commence ?</span>
+        <h2 data-it="Prenota i tuoi 30 minuti gratuiti" data-en="Book your free 30 minutes">Prenota i tuoi 30 minuti gratuiti</h2>
+        <p data-it="Scrivimi un messaggio con due righe su di te: perché vuoi imparare il francese e quando sei disponibile. Ti rispondo entro un giorno e fissiamo la prova gratuita, senza impegno." data-en="Send me a message with a couple of lines about yourself: why you want to learn French and when you're available. I'll reply within a day and we'll set up your free trial, no strings attached.">Scrivimi un messaggio con due righe su di te: perché vuoi imparare il francese e quando sei disponibile. Ti rispondo entro un giorno e fissiamo la prova gratuita, senza impegno.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://wa.me/393517223788" data-it="Scrivimi su WhatsApp" data-en="Message me on WhatsApp">Scrivimi su WhatsApp</a>
+          <a class="btn btn-ghost" style="border-color:#fff;color:#fff;background:transparent" href="mailto:tuaemail@esempio.com" data-it="Oppure via email" data-en="Or by email">Oppure via email</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p data-it="Lezioni di francese · Borgata Paradiso, Collegno (TO) · in presenza e online" data-en="French lessons · Borgata Paradiso, Collegno (Turin) · in person and online">Lezioni di francese · Borgata Paradiso, Collegno (TO) · in presenza e online</p>
+    </footer>
+  </div>
+</div>
+
+<script>
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.getElementById('btn-it').classList.toggle('active', lang==='it');
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+    document.querySelectorAll('[data-it]').forEach(function(el){
+      var v = el.getAttribute('data-'+lang);
+      if(v !== null){ el.innerHTML = v; }
+    });
+    document.title = lang==='it'
+      ? 'Lezioni di francese a Borgata Paradiso, Collegno'
+      : 'French Lessons in Borgata Paradiso, Collegno';
+  }
+</script>
+</body>
+</html>
