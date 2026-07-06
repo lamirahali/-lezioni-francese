@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Che livello di francese hai? Un sabato a Parigi | What's your French level?</title>
+<meta name="description" content="Scopri il tuo livello di francese con un test creativo: un sabato immaginario a Parigi. 12 scene, 5 minuti, risultato immediato. Discover your French level with a creative test set in Paris.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF9F4;
+    --paper-deep:#F4F0E6;
+    --seyes:#C9BCE4;
+    --seyes-light:#E2DAF2;
+    --margin-red:#D64949;
+    --ink:#20355F;
+    --ink-deep:#16233F;
+    --text:#2A2C38;
+    --soft:#6B6E7E;
+    --white:#FFFFFF;
+    --correct:#2E7D52;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Karla',sans-serif;
+    color:var(--text);
+    line-height:1.6;
+    font-size:17px;
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(to bottom, var(--seyes-light) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--seyes) 1px, transparent 1px);
+    background-size:100% 8px, 100% 32px;
+    min-height:100vh;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    top:0;bottom:0;
+    left:clamp(22px, 6vw, 90px);
+    width:2px;
+    background:var(--margin-red);
+    opacity:.75;
+    z-index:0;
+  }
+  .page{
+    position:relative;
+    z-index:1;
+    max-width:760px;
+    margin:0 auto;
+    padding:0 clamp(18px,4vw,40px) 60px;
+    padding-left:clamp(44px, 10vw, 130px);
+  }
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 0 10px;
+  }
+  .brand{
+    font-family:'Caveat',cursive;
+    font-size:1.5rem;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .lang-toggle{
+    display:flex;
+    border:1.5px solid var(--ink);
+    border-radius:999px;
+    overflow:hidden;
+    background:var(--white);
+  }
+  .lang-toggle button{
+    font-family:'Karla',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    letter-spacing:.06em;
+    padding:7px 16px;
+    border:none;
+    background:transparent;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .lang-toggle button.active{background:var(--ink);color:var(--white)}
+  .lang-toggle button:focus-visible{outline:2px solid var(--margin-red);outline-offset:2px}
+
+  .hand-note{
+    font-family:'Caveat',cursive;
+    font-size:clamp(1.35rem,3vw,1.7rem);
+    color:var(--margin-red);
+    transform:rotate(-1.2deg);
+    display:inline-block;
+    margin:26px 0 8px;
+  }
+  h1{
+    font-family:'Young Serif',serif;
+    font-size:clamp(1.9rem,5vw,2.9rem);
+    line-height:1.15;
+    color:var(--ink-deep);
+    margin-bottom:16px;
+  }
+  .intro p{max-width:56ch;margin-bottom:14px}
+  .btn{
+    display:inline-block;
+    font-family:'Karla',sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    padding:14px 28px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    background:var(--ink);
+    color:var(--white);
+    box-shadow:0 3px 0 var(--ink-deep);
+    transition:transform .15s ease;
+    margin-top:14px;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn:focus-visible{outline:3px solid var(--margin-red);outline-offset:3px}
+
+  .card{
+    background:var(--white);
+    border:1.5px solid var(--seyes-light);
+    border-radius:16px;
+    padding:clamp(22px,4vw,34px);
+    margin-top:22px;
+    box-shadow:0 2px 10px rgba(32,53,95,.06);
+  }
+  .scene-tag{
+    font-family:'Caveat',cursive;
+    font-size:1.3rem;
+    color:var(--margin-red);
+    margin-bottom:4px;
+  }
+  .progress{
+    font-size:.82rem;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--soft);
+    margin-bottom:14px;
+  }
+  .bar{
+    height:6px;
+    background:var(--paper-deep);
+    border-radius:99px;
+    overflow:hidden;
+    margin-bottom:20px;
+  }
+  .bar span{
+    display:block;height:100%;
+    background:var(--ink);
+    border-radius:99px;
+    transition:width .3s ease;
+  }
+  .scene-text{
+    font-size:1.02rem;
+    color:var(--soft);
+    margin-bottom:14px;
+    max-width:56ch;
+  }
+  .question{
+    font-family:'Young Serif',serif;
+    font-size:clamp(1.15rem,3vw,1.45rem);
+    color:var(--ink-deep);
+    margin-bottom:20px;
+  }
+  .options{display:grid;gap:10px}
+  .opt{
+    text-align:left;
+    font-family:'Karla',sans-serif;
+    font-size:1rem;
+    padding:13px 16px;
+    border-radius:10px;
+    border:1.5px solid var(--seyes-light);
+    background:var(--paper);
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .opt:hover{border-color:var(--ink)}
+  .opt:focus-visible{outline:2.5px solid var(--margin-red);outline-offset:2px}
+  .opt.chosen-correct{border-color:var(--correct);background:#EAF5EE}
+  .opt.chosen-wrong{border-color:var(--margin-red);background:#FBEDED}
+  .opt.reveal{border-color:var(--correct)}
+  .opt:disabled{cursor:default}
+  .feedback{
+    margin-top:14px;
+    font-size:.95rem;
+    color:var(--soft);
+    min-height:24px;
+  }
+  .feedback strong{color:var(--ink)}
+  .next-row{margin-top:8px}
+
+  .level-badge{
+    font-family:'Young Serif',serif;
+    font-size:clamp(2.6rem,8vw,4rem);
+    color:var(--ink-deep);
+    display:block;
+    margin:8px 0 4px;
+  }
+  .level-name{
+    font-family:'Caveat',cursive;
+    font-size:1.6rem;
+    color:var(--margin-red);
+    display:block;
+    margin-bottom:14px;
+  }
+  .result-text{max-width:56ch;margin-bottom:10px}
+  .cta-box{
+    margin-top:22px;
+    padding-top:20px;
+    border-top:1.5px dashed var(--seyes-light);
+  }
+  .name-row{margin-top:18px;max-width:340px}
+  .name-row label{
+    display:block;
+    font-weight:700;
+    font-size:.95rem;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .name-row input{
+    width:100%;
+    font-family:'Karla',sans-serif;
+    font-size:1rem;
+    padding:12px 14px;
+    border:1.5px solid var(--seyes-light);
+    border-radius:10px;
+    background:var(--white);
+    color:var(--text);
+  }
+  .name-row input:focus{
+    outline:none;
+    border-color:var(--ink);
+  }
+  .name-hint{
+    font-family:'Caveat',cursive;
+    font-size:1.15rem;
+    color:var(--margin-red);
+    margin-top:6px;
+  }
+  .privacy-note{
+    font-size:.8rem;
+    color:var(--soft);
+    margin-top:8px;
+    max-width:40ch;
+  }
+  .hidden{display:none}
+  footer{padding:36px 0 10px;color:var(--soft);font-size:.9rem}
+  @media (prefers-reduced-motion: reduce){
+    .btn,.bar span{transition:none}
+  }
+  @media (max-width:560px){
+    body::before{left:16px}
+    .page{padding-left:34px;padding-right:16px}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <a class="brand" href="index.html" data-it="il quaderno di francese" data-en="the French notebook">il quaderno di francese</a>
+    <div class="lang-toggle" role="group" aria-label="Language / Lingua">
+      <button id="btn-it" class="active" onclick="setLang('it')">IT</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <div id="intro" class="intro">
+    <span class="hand-note" data-it="Prêt·e à partir ?" data-en="Prêt·e à partir ?">Prêt·e à partir ?</span>
+    <h1 data-it="Un sabato a Parigi: che livello di francese hai?" data-en="A Saturday in Paris: what's your French level?">Un sabato a Parigi: che livello di francese hai?</h1>
+    <p data-it="Immagina di svegliarti a Parigi. Davanti a te c'è un intero sabato: un caffè al bancone, il métro, un museo, una telefonata inattesa. Dodici piccole scene, ognuna con una scelta da fare in francese." data-en="Imagine waking up in Paris. A whole Saturday lies ahead: coffee at the counter, the métro, a museum, an unexpected phone call. Twelve little scenes, each with a choice to make in French.">Immagina di svegliarti a Parigi. Davanti a te c'è un intero sabato: un caffè al bancone, il métro, un museo, una telefonata inattesa. Dodici piccole scene, ognuna con una scelta da fare in francese.</p>
+    <p data-it="Le scene diventano via via più difficili. Rispondi d'istinto, senza dizionario: alla fine scopri il tuo livello stimato. Ci vogliono circa 5 minuti. E ogni giornata a Parigi è diversa: se rifai il test, troverai scene nuove." data-en="The scenes get gradually harder. Answer by instinct, no dictionary: at the end you'll see your estimated level. It takes about 5 minutes. And every day in Paris is different: retake the test and you'll find new scenes.">Le scene diventano via via più difficili. Rispondi d'istinto, senza dizionario: alla fine scopri il tuo livello stimato. Ci vogliono circa 5 minuti. E ogni giornata a Parigi è diversa: se rifai il test, troverai scene nuove.</p>
+    <div class="name-row">
+      <label for="student-name" data-it="Come ti chiami?" data-en="What's your name?">Come ti chiami?</label>
+      <input type="text" id="student-name" maxlength="40" autocomplete="name" data-ph-it="Il tuo nome" data-ph-en="Your name" placeholder="Il tuo nome">
+      <p class="name-hint hidden" id="name-hint" data-it="Scrivi il tuo nome per iniziare la giornata!" data-en="Write your name to start the day!">Scrivi il tuo nome per iniziare la giornata!</p>
+      <p class="privacy-note" data-it="Il tuo nome e il risultato vengono salvati solo per organizzare le lezioni. Niente spam, promesso." data-en="Your name and result are saved only to organise lessons. No spam, promise.">Il tuo nome e il risultato vengono salvati solo per organizzare le lezioni. Niente spam, promesso.</p>
+    </div>
+    <button class="btn" onclick="startQuiz()" data-it="Inizia la giornata ☕" data-en="Start the day ☕">Inizia la giornata ☕</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" class="card hidden">
+    <div class="scene-tag" id="scene-tag"></div>
+    <div class="progress" id="progress"></div>
+    <div class="bar"><span id="bar-fill" style="width:0%"></span></div>
+    <p class="scene-text" id="scene-text"></p>
+    <p class="question" id="question"></p>
+    <div class="options" id="options"></div>
+    <p class="feedback" id="feedback"></p>
+    <div class="next-row"><button class="btn hidden" id="next-btn" onclick="nextQuestion()" data-it="Continua la giornata →" data-en="Continue the day →">Continua la giornata →</button></div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result" class="card hidden">
+    <span class="hand-note" id="result-note">La journée est finie !</span>
+    <span class="level-badge" id="level-badge"></span>
+    <span class="level-name" id="level-name"></span>
+    <p class="result-text" id="result-text"></p>
+    <p class="result-text" id="result-score"></p>
+    <div class="cta-box">
+      <p data-it="Questo è solo un gioco, ovviamente: il modo migliore per valutare il tuo livello è parlarne insieme. La prima sessione di 30 minuti è gratuita." data-en="This is just a game, of course: the best way to assess your level is to talk it through together. The first 30-minute session is free.">Questo è solo un gioco, ovviamente: il modo migliore per valutare il tuo livello è parlarne insieme. La prima sessione di 30 minuti è gratuita.</p>
+      <a class="btn" id="wa-link" href="https://wa.me/393517223788" data-it="Prenota la prova gratuita su WhatsApp" data-en="Book your free trial on WhatsApp">Prenota la prova gratuita su WhatsApp</a>
+      <button class="btn" style="background:var(--white);color:var(--ink);border:1.5px solid var(--ink);box-shadow:none;margin-left:8px" onclick="restart()" data-it="Vivi un'altra giornata a Parigi" data-en="Live another day in Paris">Vivi un'altra giornata a Parigi</button>
+    </div>
+  </div>
+
+  <footer>
+    <p data-it="Lezioni di francese · Borgata Paradiso, Collegno (TO) · in presenza e online" data-en="French lessons · Borgata Paradiso, Collegno (Turin) · in person and online">Lezioni di francese · Borgata Paradiso, Collegno (TO) · in presenza e online</p>
+  </footer>
+</div>
+
+<script>
+let lang = 'it';
+let current = 0;
+let score = 0;
+let answered = false;
+let activeQuestions = [];
+let currentOrder = [];
+
+/* ── TRACKING ──────────────────────────────────────────────
+   Paste your Google Apps Script Web App URL between the quotes
+   to save every result (name, level, score, date) to your
+   Google Sheet. Leave empty to disable tracking. */
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwjp_hf2Fxap6PdJmpqLc28-BKStvAJA7ONmEw1WH34EqOokpkOC4_nTT-AjPL_nDc/exec";
+
+function sendResult(lvl){
+  if(!SHEET_ENDPOINT) return;
+  try{
+    fetch(SHEET_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify({
+        name: studentName,
+        level: lvl.badge,
+        levelName: lvl.name.it,
+        score: score,
+        total: activeQuestions.length,
+        lang: lang,
+        date: new Date().toISOString()
+      })
+    });
+  }catch(e){ /* tracking must never break the quiz */ }
+}
+
+/* Each slot of the day has 2 variants. On every run, one variant per slot is
+   chosen, always different from the one used in the previous run. */
+const POOL = [
+  { /* 1 · 8h00 */
+    tag:{it:"8h00 · Il risveglio", en:"8am · Waking up"},
+    variants:[
+      {
+        scene:{it:"La padrona di casa del tuo B&B ti saluta sulle scale.", en:"Your B&B host greets you on the stairs."},
+        q:"« Bonjour ! Vous avez bien dormi ? »",
+        opts:["Oui, merci beaucoup !","Au revoir, madame !","Je m'appelle Paul.","Non, je suis français."],
+        correct:0,
+        fb:{it:"« Vous avez bien dormi ? » significa « Ha dormito bene? ». La risposta naturale è « Oui, merci beaucoup ! »", en:"« Vous avez bien dormi ? » means « Did you sleep well? ». The natural answer is « Oui, merci beaucoup ! »"}
+      },
+      {
+        scene:{it:"A colazione, la padrona di casa ti chiede cosa preferisci.", en:"At breakfast, your host asks what you'd prefer."},
+        q:"« Vous voulez du café ou du thé ? »",
+        opts:["Du café, s'il vous plaît.","Il est huit heures.","J'habite en Italie.","Bonne nuit !"],
+        correct:0,
+        fb:{it:"Ti sta offrendo caffè o tè. « Du café, s'il vous plaît » è la risposta giusta (e la scelta giusta, ovviamente).", en:"She's offering coffee or tea. « Du café, s'il vous plaît » is the right answer (and the right choice, obviously)."}
+      }
+    ]
+  },
+  { /* 2 · 8h30 */
+    tag:{it:"8h30 · Al bar", en:"8:30am · At the café"},
+    variants:[
+      {
+        scene:{it:"Sei al bancone di un café. Vuoi un cornetto e un caffè.", en:"You're at a café counter. You want a croissant and a coffee."},
+        q:{it:"Cosa dici al barista?", en:"What do you say to the barista?"},
+        opts:["Un croissant et un café, s'il vous plaît.","Je voudrais dormir, merci.","Où est la gare ?","J'ai deux frères et une sœur."],
+        correct:0,
+        fb:{it:"« S'il vous plaît » alla fine rende l'ordine gentile e naturale.", en:"Adding « s'il vous plaît » makes the order polite and natural."}
+      },
+      {
+        scene:{it:"Hai ordinato. Il barista ti dice: « Ça fait trois euros cinquante. »", en:"You've ordered. The barista says: « Ça fait trois euros cinquante. »"},
+        q:{it:"Cosa ti sta dicendo?", en:"What is he telling you?"},
+        opts:[
+          {it:"Il conto è di 3,50 euro.", en:"The total is 3.50 euros."},
+          {it:"Il bar chiude alle 3:50.", en:"The café closes at 3:50."},
+          {it:"Ci sono tre tavoli liberi.", en:"There are three free tables."},
+          {it:"Il caffè arriva tra tre minuti.", en:"The coffee will be ready in three minutes."}
+        ],
+        correct:0,
+        fb:{it:"« Ça fait... » è la formula classica per dire il totale da pagare.", en:"« Ça fait... » is the classic phrase for announcing the total to pay."}
+      }
+    ]
+  },
+  { /* 3 · 9h15 */
+    tag:{it:"9h15 · Il métro", en:"9:15am · The métro"},
+    variants:[
+      {
+        scene:{it:"Sul cartello leggi: « La ligne 4 est fermée le week-end pour travaux ».", en:"The sign reads: « La ligne 4 est fermée le week-end pour travaux »."},
+        q:{it:"Cosa significa?", en:"What does it mean?"},
+        opts:[
+          {it:"La linea 4 è chiusa nel weekend per lavori.", en:"Line 4 is closed on weekends for maintenance."},
+          {it:"La linea 4 è gratuita nel weekend.", en:"Line 4 is free on weekends."},
+          {it:"La linea 4 apre solo nel weekend.", en:"Line 4 only opens on weekends."},
+          {it:"La linea 4 è la più veloce.", en:"Line 4 is the fastest."}
+        ],
+        correct:0,
+        fb:{it:"« Fermée » = chiusa, « travaux » = lavori. Meglio cambiare linea!", en:"« Fermée » = closed, « travaux » = works. Better take another line!"}
+      },
+      {
+        scene:{it:"L'altoparlante annuncia: « Prochain arrêt : Châtelet. Correspondance lignes 1, 7 et 11. »", en:"The loudspeaker announces: « Prochain arrêt : Châtelet. Correspondance lignes 1, 7 et 11. »"},
+        q:{it:"Cosa hai appena sentito?", en:"What did you just hear?"},
+        opts:[
+          {it:"La prossima fermata è Châtelet, dove si può cambiare con le linee 1, 7 e 11.", en:"The next stop is Châtelet, where you can change to lines 1, 7 and 11."},
+          {it:"Il treno salta la fermata Châtelet.", en:"The train is skipping Châtelet."},
+          {it:"Châtelet è l'ultima fermata.", en:"Châtelet is the last stop."},
+          {it:"Le linee 1, 7 e 11 sono chiuse.", en:"Lines 1, 7 and 11 are closed."}
+        ],
+        correct:0,
+        fb:{it:"« Prochain arrêt » = prossima fermata, « correspondance » = coincidenza, cambio linea.", en:"« Prochain arrêt » = next stop, « correspondance » = connection, line change."}
+      }
+    ]
+  },
+  { /* 4 · 10h00 */
+    tag:{it:"10h00 · Chiedere la strada", en:"10am · Asking for directions"},
+    variants:[
+      {
+        scene:{it:"Ti sei perso vicino al Louvre. Fermi un passante.", en:"You're lost near the Louvre. You stop a passer-by."},
+        q:{it:"Come chiedi dov'è il museo, in modo gentile?", en:"How do you politely ask where the museum is?"},
+        opts:["Excusez-moi, où est le musée, s'il vous plaît ?","Le musée, c'est moi !","Donnez-moi le musée !","Je déteste les musées."],
+        correct:0,
+        fb:{it:"« Excusez-moi » + « s'il vous plaît »: la formula magica della gentilezza francese.", en:"« Excusez-moi » + « s'il vous plaît »: the magic formula of French politeness."}
+      },
+      {
+        scene:{it:"Hai chiesto la strada. Il passante risponde: « C'est tout droit, puis la deuxième rue à gauche. »", en:"You asked for directions. The passer-by replies: « C'est tout droit, puis la deuxième rue à gauche. »"},
+        q:{it:"Dove devi andare?", en:"Where should you go?"},
+        opts:[
+          {it:"Dritto, poi la seconda strada a sinistra.", en:"Straight ahead, then the second street on the left."},
+          {it:"Dritto, poi la seconda strada a destra.", en:"Straight ahead, then the second street on the right."},
+          {it:"Indietro, poi subito a sinistra.", en:"Back the way you came, then immediately left."},
+          {it:"È troppo lontano per andarci a piedi.", en:"It's too far to walk."}
+        ],
+        correct:0,
+        fb:{it:"« Tout droit » = dritto (attenzione: non « a destra », che è « à droite »!). « À gauche » = a sinistra.", en:"« Tout droit » = straight ahead (careful: not « right », which is « à droite »!). « À gauche » = left."}
+      }
+    ]
+  },
+  { /* 5 · 11h30 */
+    tag:{it:"11h30 · Al museo", en:"11:30am · At the museum"},
+    variants:[
+      {
+        scene:{it:"La bigliettaia ti chiede: « Vous avez moins de 26 ans ? C'est gratuit pour les jeunes Européens. »", en:"The ticket clerk asks: « Vous avez moins de 26 ans ? C'est gratuit pour les jeunes Européens. »"},
+        q:{it:"Cosa ti sta dicendo?", en:"What is she telling you?"},
+        opts:[
+          {it:"Se hai meno di 26 anni ed è gratis per i giovani europei.", en:"If you're under 26 it's free for young Europeans."},
+          {it:"Il museo chiude alle 26.", en:"The museum closes at 26."},
+          {it:"Servono 26 euro per entrare.", en:"You need 26 euros to enter."},
+          {it:"Solo gli europei possono entrare.", en:"Only Europeans can enter."}
+        ],
+        correct:0,
+        fb:{it:"« Moins de 26 ans » = meno di 26 anni. E sì, per i giovani UE molti musei sono gratuiti!", en:"« Moins de 26 ans » = under 26. And yes, many museums are free for young EU citizens!"}
+      },
+      {
+        scene:{it:"All'ingresso della sala vedi il cartello: « Interdiction de photographier avec flash ».", en:"At the room entrance you see a sign: « Interdiction de photographier avec flash »."},
+        q:{it:"Cosa significa?", en:"What does it mean?"},
+        opts:[
+          {it:"È vietato fotografare con il flash.", en:"Flash photography is forbidden."},
+          {it:"È obbligatorio usare il flash.", en:"Using the flash is mandatory."},
+          {it:"Le foto sono vietate del tutto.", en:"All photos are forbidden."},
+          {it:"Qui si possono comprare le foto.", en:"You can buy photos here."}
+        ],
+        correct:0,
+        fb:{it:"« Interdiction de... » = divieto di... Le foto sì, ma senza flash: i quadri ringraziano.", en:"« Interdiction de... » = it is forbidden to... Photos yes, but no flash: the paintings thank you."}
+      }
+    ]
+  },
+  { /* 6 · 13h00 */
+    tag:{it:"13h00 · Il pranzo", en:"1pm · Lunch"},
+    variants:[
+      {
+        scene:{it:"Il cameriere ti chiede: « Et comme boisson ? »", en:"The waiter asks: « Et comme boisson ? »"},
+        q:{it:"Cosa risponde una persona che ha capito la domanda?", en:"What would someone who understood the question answer?"},
+        opts:["Une carafe d'eau, s'il vous plaît.","Le steak, bien cuit.","L'addition, s'il vous plaît.","Une table pour deux."],
+        correct:0,
+        fb:{it:"« Boisson » = bevanda. « Une carafe d'eau » è l'acqua del rubinetto, gratuita nei ristoranti francesi.", en:"« Boisson » = drink. « Une carafe d'eau » is tap water, free in French restaurants."}
+      },
+      {
+        scene:{it:"Hai finito di mangiare e vuoi pagare.", en:"You've finished your meal and want to pay."},
+        q:{it:"Cosa dici al cameriere?", en:"What do you say to the waiter?"},
+        opts:["L'addition, s'il vous plaît.","Le menu, s'il vous plaît.","Encore du pain, s'il vous plaît.","Une table pour deux, s'il vous plaît."],
+        correct:0,
+        fb:{it:"« L'addition » = il conto. Le altre frasi ti farebbero restare a tavola ancora un bel po'.", en:"« L'addition » = the bill. The other phrases would keep you at the table quite a while longer."}
+      }
+    ]
+  },
+  { /* 7 · 14h30 */
+    tag:{it:"14h30 · Un messaggio vocale", en:"2:30pm · A voicemail"},
+    variants:[
+      {
+        scene:{it:"Un amico francese ti lascia un vocale: « On se retrouve devant la fontaine à cinq heures, ça te va ? »", en:"A French friend leaves you a voicemail: « On se retrouve devant la fontaine à cinq heures, ça te va ? »"},
+        q:{it:"Cosa ti propone?", en:"What is he suggesting?"},
+        opts:[
+          {it:"Di vedervi davanti alla fontana alle cinque.", en:"Meeting in front of the fountain at five."},
+          {it:"Di comprare cinque bottiglie d'acqua.", en:"Buying five bottles of water."},
+          {it:"Di andare via alle cinque.", en:"Leaving at five."},
+          {it:"Di telefonargli tra cinque ore.", en:"Calling him back in five hours."}
+        ],
+        correct:0,
+        fb:{it:"« On se retrouve » = ci ritroviamo, ci vediamo. « Ça te va ? » = ti va bene?", en:"« On se retrouve » = let's meet up. « Ça te va ? » = does that work for you?"}
+      },
+      {
+        scene:{it:"Un altro vocale: « Je suis en retard, commence sans moi, je te rejoins dès que possible. »", en:"Another voicemail: « Je suis en retard, commence sans moi, je te rejoins dès que possible. »"},
+        q:{it:"Cosa ti sta chiedendo?", en:"What is he asking you?"},
+        opts:[
+          {it:"Di iniziare senza di lui: ti raggiunge appena può.", en:"To start without him: he'll join you as soon as he can."},
+          {it:"Di aspettarlo prima di iniziare.", en:"To wait for him before starting."},
+          {it:"Di annullare tutto.", en:"To cancel everything."},
+          {it:"Di raggiungerlo tu a casa sua.", en:"To go and meet him at his place."}
+        ],
+        correct:0,
+        fb:{it:"« Commence sans moi » = inizia senza di me. « Dès que possible » = appena possibile.", en:"« Commence sans moi » = start without me. « Dès que possible » = as soon as possible."}
+      }
+    ]
+  },
+  { /* 8 · 15h30 */
+    tag:{it:"15h30 · Shopping", en:"3:30pm · Shopping"},
+    variants:[
+      {
+        scene:{it:"In una libreria vuoi dire che ieri hai comprato lo stesso libro.", en:"In a bookshop you want to say you bought the same book yesterday."},
+        q:{it:"Quale frase è corretta?", en:"Which sentence is correct?"},
+        opts:["J'ai acheté le même livre hier.","Je acheter le même livre hier.","J'achèterai le même livre hier.","Je suis acheté le même livre hier."],
+        correct:0,
+        fb:{it:"Passé composé con « avoir »: j'ai acheté. Il futuro (« j'achèterai ») non funziona con « hier ».", en:"Passé composé with « avoir »: j'ai acheté. The future tense (« j'achèterai ») doesn't work with « hier »."}
+      },
+      {
+        scene:{it:"Il libraio ti dice: « Je viens de recevoir ce roman, il est arrivé ce matin. »", en:"The bookseller tells you: « Je viens de recevoir ce roman, il est arrivé ce matin. »"},
+        q:{it:"Cosa significa « je viens de recevoir »?", en:"What does « je viens de recevoir » mean?"},
+        opts:[
+          {it:"L'ho appena ricevuto.", en:"I've just received it."},
+          {it:"Sto per riceverlo.", en:"I'm about to receive it."},
+          {it:"Vengo a riceverlo.", en:"I'm coming to receive it."},
+          {it:"Non lo riceverò mai.", en:"I'll never receive it."}
+        ],
+        correct:0,
+        fb:{it:"« Venir de » + infinito = aver appena fatto qualcosa. Il passato prossimo... appena passato!", en:"« Venir de » + infinitive = to have just done something. The very recent past!"}
+      }
+    ]
+  },
+  { /* 9 · 17h00 */
+    tag:{it:"17h00 · Alla fontana", en:"5pm · At the fountain"},
+    variants:[
+      {
+        scene:{it:"Il tuo amico arriva in ritardo e dice: « Désolé, j'ai raté le bus, il a fallu que j'attende le suivant. »", en:"Your friend arrives late and says: « Désolé, j'ai raté le bus, il a fallu que j'attende le suivant. »"},
+        q:{it:"Cosa è successo?", en:"What happened?"},
+        opts:[
+          {it:"Ha perso il bus e ha dovuto aspettare il successivo.", en:"He missed the bus and had to wait for the next one."},
+          {it:"Il bus era guasto.", en:"The bus broke down."},
+          {it:"Ha dimenticato il biglietto.", en:"He forgot his ticket."},
+          {it:"È venuto a piedi.", en:"He walked instead."}
+        ],
+        correct:0,
+        fb:{it:"« Rater le bus » = perdere il bus. « Il a fallu que » introduce il congiuntivo: j'attende.", en:"« Rater le bus » = to miss the bus. « Il a fallu que » triggers the subjunctive: j'attende."}
+      },
+      {
+        scene:{it:"Il tuo amico arriva trafelato: « J'ai failli tomber dans les escaliers du métro ! »", en:"Your friend arrives out of breath: « J'ai failli tomber dans les escaliers du métro ! »"},
+        q:{it:"Cosa gli è successo?", en:"What happened to him?"},
+        opts:[
+          {it:"Stava per cadere sulle scale del métro, ma non è caduto.", en:"He nearly fell on the métro stairs, but didn't."},
+          {it:"È caduto sulle scale del métro.", en:"He fell on the métro stairs."},
+          {it:"Ha fatto cadere qualcuno.", en:"He knocked someone over."},
+          {it:"Le scale del métro erano chiuse.", en:"The métro stairs were closed."}
+        ],
+        correct:0,
+        fb:{it:"« Faillir » + infinito = essere sul punto di, quasi fare qualcosa. Ha rischiato di cadere, ma è ancora in piedi!", en:"« Faillir » + infinitive = to almost do something. He nearly fell, but he's still standing!"}
+      }
+    ]
+  },
+  { /* 10 · 18h30 */
+    tag:{it:"18h30 · L'aperitivo", en:"6:30pm · Apéro time"},
+    variants:[
+      {
+        scene:{it:"Un'amica racconta: « Si j'avais su qu'il pleuvrait, j'aurais pris mon parapluie. »", en:"A friend says: « Si j'avais su qu'il pleuvrait, j'aurais pris mon parapluie. »"},
+        q:{it:"Cosa esprime questa frase?", en:"What does this sentence express?"},
+        opts:[
+          {it:"Un rimpianto: se avesse saputo della pioggia, avrebbe preso l'ombrello.", en:"A regret: had she known about the rain, she would have taken her umbrella."},
+          {it:"Un piano per domani.", en:"A plan for tomorrow."},
+          {it:"Un ordine: prendi l'ombrello!", en:"An order: take the umbrella!"},
+          {it:"Una certezza: pioverà sicuramente.", en:"A certainty: it will definitely rain."}
+        ],
+        correct:0,
+        fb:{it:"È il periodo ipotetico del passato: plus-que-parfait + conditionnel passé. Il classico rimpianto francese.", en:"It's a past hypothetical: plus-que-parfait + conditionnel passé. The classic French regret."}
+      },
+      {
+        scene:{it:"Racconti di essere preoccupato per un colloquio. Un'amica ti dice: « À ta place, je ne m'en ferais pas. »", en:"You mention being worried about an interview. A friend says: « À ta place, je ne m'en ferais pas. »"},
+        q:{it:"Cosa ti sta dicendo?", en:"What is she telling you?"},
+        opts:[
+          {it:"Al tuo posto, non si preoccuperebbe.", en:"In your shoes, she wouldn't worry."},
+          {it:"Al tuo posto, non ci andrebbe.", en:"In your shoes, she wouldn't go."},
+          {it:"Vuole prendere il tuo posto al colloquio.", en:"She wants to take your place at the interview."},
+          {it:"Non farebbe mai un colloquio.", en:"She would never do an interview."}
+        ],
+        correct:0,
+        fb:{it:"« S'en faire » = preoccuparsi. « À ta place, je ne m'en ferais pas » = al posto tuo non mi preoccuperei.", en:"« S'en faire » = to worry. « À ta place, je ne m'en ferais pas » = if I were you, I wouldn't worry."}
+      }
+    ]
+  },
+  { /* 11 · 20h00 */
+    tag:{it:"20h00 · A cena", en:"8pm · Dinner"},
+    variants:[
+      {
+        scene:{it:"Qualcuno esclama: « Ce restaurant, ce n'est pas donné ! »", en:"Someone exclaims: « Ce restaurant, ce n'est pas donné ! »"},
+        q:{it:"Cosa intende?", en:"What do they mean?"},
+        opts:[
+          {it:"Il ristorante è caro.", en:"The restaurant is expensive."},
+          {it:"Il ristorante è chiuso.", en:"The restaurant is closed."},
+          {it:"Il ristorante non accetta prenotazioni.", en:"The restaurant doesn't take bookings."},
+          {it:"Il cibo non è ancora arrivato.", en:"The food hasn't arrived yet."}
+        ],
+        correct:0,
+        fb:{it:"« Ce n'est pas donné » letteralmente « non è regalato »: un modo di dire per « è caro ».", en:"« Ce n'est pas donné » literally « it's not given away »: an idiom for « it's pricey »."}
+      },
+      {
+        scene:{it:"Un commensale racconta della sua giornata: « À midi, on a mangé sur le pouce, on n'avait pas le temps. »", en:"A dinner companion talks about their day: « À midi, on a mangé sur le pouce, on n'avait pas le temps. »"},
+        q:{it:"Come hanno mangiato a mezzogiorno?", en:"How did they eat at midday?"},
+        opts:[
+          {it:"Al volo, in fretta, senza sedersi con calma.", en:"On the go, quickly, without sitting down properly."},
+          {it:"Con le mani.", en:"With their hands."},
+          {it:"Solo con il pollice.", en:"Only with their thumb."},
+          {it:"In un ristorante elegante.", en:"In a fancy restaurant."}
+        ],
+        correct:0,
+        fb:{it:"« Manger sur le pouce » (letteralmente « sul pollice ») = mangiare al volo, un boccone veloce.", en:"« Manger sur le pouce » (literally « on the thumb ») = to grab a quick bite."}
+      }
+    ]
+  },
+  { /* 12 · 22h30 */
+    tag:{it:"22h30 · Fine serata", en:"10:30pm · End of the evening"},
+    variants:[
+      {
+        scene:{it:"Sul giornale lasciato sul tavolo leggi: « Quoique le projet ait suscité de vives critiques, la mairie entend le mener à bien. »", en:"On a newspaper left on the table you read: « Quoique le projet ait suscité de vives critiques, la mairie entend le mener à bien. »"},
+        q:{it:"Qual è il senso della frase?", en:"What does the sentence mean?"},
+        opts:[
+          {it:"Nonostante le forti critiche, il comune intende portare a termine il progetto.", en:"Despite strong criticism, the city hall intends to see the project through."},
+          {it:"Il comune ha annullato il progetto per le critiche.", en:"The city hall cancelled the project due to criticism."},
+          {it:"Il progetto è stato approvato all'unanimità.", en:"The project was approved unanimously."},
+          {it:"Il comune chiede nuove critiche al progetto.", en:"The city hall is asking for more feedback."}
+        ],
+        correct:0,
+        fb:{it:"« Quoique » + congiuntivo = benché. « Mener à bien » = portare a termine con successo. Livello da lettori di Le Monde!", en:"« Quoique » + subjunctive = although. « Mener à bien » = to carry through successfully. Le Monde reader level!"}
+      },
+      {
+        scene:{it:"Un titolo di giornale recita: « Bien que la fréquentation ait baissé, le théâtre ne compte pas baisser les bras. »", en:"A newspaper headline reads: « Bien que la fréquentation ait baissé, le théâtre ne compte pas baisser les bras. »"},
+        q:{it:"Cosa dice il titolo?", en:"What does the headline say?"},
+        opts:[
+          {it:"Benché il pubblico sia calato, il teatro non intende arrendersi.", en:"Although attendance has dropped, the theatre doesn't intend to give up."},
+          {it:"Il teatro chiude per mancanza di pubblico.", en:"The theatre is closing due to low attendance."},
+          {it:"Il pubblico del teatro è in crescita.", en:"The theatre's attendance is growing."},
+          {it:"Il teatro abbassa i prezzi dei biglietti.", en:"The theatre is lowering ticket prices."}
+        ],
+        correct:0,
+        fb:{it:"« Bien que » + congiuntivo = benché. « Baisser les bras » (abbassare le braccia) = arrendersi.", en:"« Bien que » + subjunctive = although. « Baisser les bras » (to lower one's arms) = to give up."}
+      }
+    ]
+  }
+];
+
+/* remembers which variant was used per slot, so each new run avoids it */
+let lastPicks = new Array(POOL.length).fill(-1);
+
+function buildQuiz(){
+  activeQuestions = POOL.map(function(slot, i){
+    const n = slot.variants.length;
+    let pick;
+    if(n === 1){
+      pick = 0;
+    } else {
+      do {
+        pick = Math.floor(Math.random() * n);
+      } while(pick === lastPicks[i]);
+    }
+    lastPicks[i] = pick;
+    const v = slot.variants[pick];
+    return {tag: slot.tag, scene: v.scene, q: v.q, opts: v.opts, correct: v.correct, fb: v.fb};
+  });
+}
+
+function t(field){
+  if(typeof field === 'string') return field;
+  return field[lang];
+}
+
+function setLang(l){
+  lang = l;
+  document.documentElement.lang = l;
+  document.getElementById('btn-it').classList.toggle('active', l==='it');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.querySelectorAll('[data-it]').forEach(function(el){
+    var v = el.getAttribute('data-'+l);
+    if(v !== null){ el.innerHTML = v; }
+  });
+  var nameInput = document.getElementById('student-name');
+  if(nameInput){
+    nameInput.placeholder = nameInput.getAttribute('data-ph-'+l) || nameInput.placeholder;
+  }
+  if(!document.getElementById('quiz').classList.contains('hidden')) renderQuestion(true);
+  if(!document.getElementById('result').classList.contains('hidden')) renderResult();
+}
+
+let studentName = '';
+
+function startQuiz(){
+  const nameInput = document.getElementById('student-name');
+  const name = nameInput.value.trim();
+  if(!name){
+    document.getElementById('name-hint').classList.remove('hidden');
+    nameInput.focus();
+    return;
+  }
+  studentName = name;
+  document.getElementById('name-hint').classList.add('hidden');
+  current = 0; score = 0;
+  buildQuiz();
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('result').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  renderQuestion();
+}
+
+function shuffle(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function renderQuestion(keepOrder){
+  if(!keepOrder) answered = false;
+  const item = activeQuestions[current];
+  document.getElementById('scene-tag').textContent = t(item.tag);
+  document.getElementById('progress').textContent =
+    (lang==='it' ? 'Scena ' : 'Scene ') + (current+1) + ' / ' + activeQuestions.length;
+  document.getElementById('bar-fill').style.width = ((current) / activeQuestions.length * 100) + '%';
+  document.getElementById('scene-text').textContent = t(item.scene);
+  document.getElementById('question').textContent = t(item.q);
+
+  if(!keepOrder){
+    currentOrder = shuffle([0,1,2,3]);
+    document.getElementById('feedback').innerHTML = '';
+    document.getElementById('next-btn').classList.add('hidden');
+  }
+  const box = document.getElementById('options');
+  box.innerHTML = '';
+  currentOrder.forEach(function(idx){
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = t(item.opts[idx]);
+    if(answered){
+      btn.disabled = true;
+      if(idx === item.correct) btn.classList.add('reveal');
+    } else {
+      btn.onclick = function(){ answer(idx, btn); };
+    }
+    box.appendChild(btn);
+  });
+}
+
+function answer(idx, btnEl){
+  if(answered) return;
+  answered = true;
+  const item = activeQuestions[current];
+  const correct = idx === item.correct;
+  if(correct) score++;
+  document.querySelectorAll('.opt').forEach(function(b, i){
+    b.disabled = true;
+    if(currentOrder[i] === item.correct) b.classList.add('reveal');
+  });
+  btnEl.classList.add(correct ? 'chosen-correct' : 'chosen-wrong');
+  const fbPrefix = correct ? '<strong>Très bien !</strong> ' : '<strong>Pas grave !</strong> ';
+  document.getElementById('feedback').innerHTML = fbPrefix + t(item.fb);
+  document.getElementById('next-btn').classList.remove('hidden');
+  if(current === activeQuestions.length - 1){
+    document.getElementById('next-btn').innerHTML =
+      lang==='it' ? 'Scopri il tuo livello ✨' : 'Discover your level ✨';
+  }
+}
+
+function nextQuestion(){
+  if(current < activeQuestions.length - 1){
+    current++;
+    renderQuestion();
+    if(current < activeQuestions.length - 1){
+      document.getElementById('next-btn').innerHTML =
+        lang==='it' ? 'Continua la giornata →' : 'Continue the day →';
+    }
+  } else {
+    showResult();
+  }
+}
+
+const LEVELS = [
+  {min:0, max:2, badge:"A0 → A1", name:{it:"Le débutant curieux", en:"Le débutant curieux"},
+   text:{it:"Parigi ti ha un po' travolto, ma è normale: si parte tutti da qui. Con delle basi solide, in poche settimane ordinerai il croissant senza pensarci.", en:"Paris swept you off your feet a little, but that's normal: everyone starts here. With solid foundations, you'll be ordering croissants without thinking in a few weeks."}},
+  {min:3, max:5, badge:"A1 → A2", name:{it:"Le voyageur débrouillard", en:"Le voyageur débrouillard"},
+   text:{it:"Sopravvivi benissimo alle situazioni di base: saluti, ordinazioni, indicazioni. Il prossimo passo è il passato, il futuro e le conversazioni vere.", en:"You handle the basics beautifully: greetings, ordering, directions. Next step: past and future tenses, and real conversations."}},
+  {min:6, max:8, badge:"A2 → B1", name:{it:"Le parisien d'adoption", en:"Le parisien d'adoption"},
+   text:{it:"Te la cavi in quasi tutte le scene della giornata. Con un po' di lavoro su congiuntivo, ipotetici ed espressioni idiomatiche, il salto al livello intermedio è vicino.", en:"You got through almost the whole day. With some work on the subjunctive, hypotheticals and idioms, the jump to intermediate level is close."}},
+  {min:9, max:10, badge:"B1 → B2", name:{it:"Le presque bilingue", en:"Le presque bilingue"},
+   text:{it:"Congiuntivi, ipotetici, modi di dire: poco ti sfugge. Ti manca solo la scioltezza e la sicurezza della conversazione continua. È esattamente il lavoro più bello da fare insieme.", en:"Subjunctives, hypotheticals, idioms: little escapes you. All you're missing is fluency and confidence in sustained conversation. That's exactly the most enjoyable work to do together."}},
+  {min:11, max:12, badge:"B2+", name:{it:"L'âme française", en:"L'âme française"},
+   text:{it:"Hai letto il giornale a fine serata senza battere ciglio. A questo livello si lavora su sfumature, registri e cultura: conversazione pura, il francese più divertente.", en:"You read the newspaper at the end of the night without blinking. At this level we work on nuance, register and culture: pure conversation, the most fun kind of French."}}
+];
+
+function showResult(){
+  document.getElementById('quiz').classList.add('hidden');
+  document.getElementById('result').classList.remove('hidden');
+  renderResult();
+  const lvl = LEVELS.find(l => score >= l.min && score <= l.max) || LEVELS[0];
+  sendResult(lvl);
+}
+
+function renderResult(){
+  const lvl = LEVELS.find(l => score >= l.min && score <= l.max) || LEVELS[0];
+  document.getElementById('result-note').textContent =
+    'La journée est finie, ' + studentName + ' !';
+  document.getElementById('level-badge').textContent = lvl.badge;
+  document.getElementById('level-name').textContent = t(lvl.name);
+  document.getElementById('result-text').textContent = t(lvl.text);
+  document.getElementById('result-score').textContent =
+    lang==='it'
+      ? 'Hai risposto correttamente a ' + score + ' scene su ' + activeQuestions.length + '.'
+      : 'You answered ' + score + ' out of ' + activeQuestions.length + ' scenes correctly.';
+  document.querySelectorAll('#result [data-it]').forEach(function(el){
+    var v = el.getAttribute('data-'+lang);
+    if(v !== null){ el.innerHTML = v; }
+  });
+  var waMsg = lang==='it'
+    ? 'Ciao Lami! Sono ' + studentName + '. Ho fatto il test "Un sabato a Parigi": livello ' + lvl.badge + ' (' + score + '/' + activeQuestions.length + '). Vorrei prenotare la prova gratuita di 30 minuti!'
+    : 'Hi Lami! I\'m ' + studentName + '. I took the "A Saturday in Paris" test: level ' + lvl.badge + ' (' + score + '/' + activeQuestions.length + '). I\'d like to book the free 30-minute trial!';
+  document.getElementById('wa-link').href =
+    'https://wa.me/393517223788?text=' + encodeURIComponent(waMsg);
+}
+
+function restart(){
+  document.getElementById('result').classList.add('hidden');
+  startQuiz();
+}
+</script>
+</body>
+</html>
